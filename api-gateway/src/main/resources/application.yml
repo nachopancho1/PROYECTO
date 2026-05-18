@@ -1,0 +1,38 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # 1. CLIENTES - Puerto 8082
+        - id: ms-clientes
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/clientes/**, /api/direcciones/**
+
+        # 2. PRODUCTOS - Puerto 8081
+        - id: ms-productos
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/productos/**, /api/categorias/**, /api/ofertas/**
+
+        # 3. INVENTARIO - Puerto 8085
+        - id: ms-inventario
+          uri: http://localhost:8085 
+          predicates:
+            - Path=/api/movimientos**, /api/bodegas/**, /api/inventario/**
+
+        # 4. PROVEEDORES - Puerto 8083
+        - id: ms-proveedores
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/proveedores/**, /api/suministros/**, /api/contactos/**
+
+        # 5. VENTAS - Puerto 8084
+        - id: ms-ventas
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/ventas/**, /api/metodos-pago/**

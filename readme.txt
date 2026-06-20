@@ -25,6 +25,7 @@ El sistema opera bajo una arquitectura de microservicios independientes. El **AP
 | **MS-Inventario** | `8084` | Control de stock. |
 | **MS-Ventas** | `8085` | Transacciones y validaciones. |
 ahora en este lugar deberia salir el puerto de 8086 que es calificacion
+en este ahora deberia de salir en el puesto de 8087 el de reclamos
 
 ---
 

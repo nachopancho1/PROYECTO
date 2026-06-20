@@ -17,4 +17,6 @@ public class Estadolocal {
     private Long id;
     
     private String aspecto;
+    
+    private String descripcion; 
 }

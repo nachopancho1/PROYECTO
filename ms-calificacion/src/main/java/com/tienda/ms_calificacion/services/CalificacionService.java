@@ -43,7 +43,6 @@ public class CalificacionService {
         log.info("Ignacio: Procesando registro de nueva calificacion");
         
         Calificacion c = new Calificacion();
-        // Cambiado a tus variables reales: estrellas y comentario
         c.setEstrellas(dto.getPuntaje()); 
         c.setComentario(dto.getComentario());
         
@@ -62,8 +61,8 @@ public class CalificacionService {
         log.info("Ignacio: Procesando registro de estado de local");
         
         Estadolocal e = new Estadolocal();
-        // Cambiado a tu variable real: aspecto
-        e.setAspecto(dto.getEstado()); 
+        e.setAspecto(dto.getEstado());      // Guarda el estado en aspecto
+        e.setDescripcion(dto.getDescripcion()); // ¡AGREGA ESTA LÍNEA para guardar la descripción!
         
         return estadoRepo.save(e);
     }
@@ -80,7 +79,6 @@ public class CalificacionService {
         log.info("Ignacio: Procesando registro de opinion manual");
         
         Opinion o = new Opinion();
-        // Cambiado a tu variable real: descripcion
         o.setDescripcion(dto.getTexto()); 
         
         return opinRepo.save(o);

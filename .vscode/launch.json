@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MsCalificacionApplication",
+            "request": "launch",
+            "mainClass": "com.tienda.ms_calificacion.MsCalificacionApplication",
+            "projectName": "ms_calificacion"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-MsProductosApplication<ms-productos>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

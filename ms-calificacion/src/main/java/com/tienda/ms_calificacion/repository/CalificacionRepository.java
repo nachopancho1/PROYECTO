@@ -2,8 +2,8 @@ package com.tienda.ms_calificacion.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.tienda.ms_calificacion.model.calificacion;
+import com.tienda.ms_calificacion.model.Calificacion;
 
 @Repository
-public interface CalificacionRepository extends JpaRepository<alificacion, Long> {
+public interface CalificacionRepository extends JpaRepository<Calificacion, Long> {
 }

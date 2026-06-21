@@ -1,0 +1,113 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "MsReclamosApplication",
+            "request": "launch",
+            "mainClass": "com.tienda.ms_reclamos.MsReclamosApplication",
+            "projectName": "ms_reclamos"
+        },
+        {
+            "type": "java",
+            "name": "MsCalificacionApplication",
+            "request": "launch",
+            "mainClass": "com.tienda.ms_calificacion.MsCalificacionApplication",
+            "projectName": "ms_calificacion"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsProductosApplication<ms-productos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_productos.MsProductosApplication",
+            "projectName": "ms-productos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=58083 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=ms-productos"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsClientesApplication<ms-clientes>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_clientes.MsClientesApplication",
+            "projectName": "ms-clientes",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsInventarioApplication<ms-inventario>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_inventario.MsInventarioApplication",
+            "projectName": "ms-inventario",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsProveedoresApplication<ms-proveedores>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_proveedores.MsProveedoresApplication",
+            "projectName": "ms-proveedores",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsVentasApplication<ms-ventas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_ventas.MsVentasApplication",
+            "projectName": "ms-ventas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiGatewayApplication<api-gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.api_gateway.ApiGatewayApplication",
+            "projectName": "api-gateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsFacturacionApplication<ms-facturacion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_facturacion.MsFacturacionApplication",
+            "projectName": "ms-facturacion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsPedidosApplication<ms-pedidos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_pedidos.MsPedidosApplication",
+            "projectName": "ms-pedidos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsSoporteApplication<ms-soporte>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_soporte.MsSoporteApplication",
+            "projectName": "ms-soporte",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

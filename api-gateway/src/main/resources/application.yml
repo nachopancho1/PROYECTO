@@ -1,0 +1,106 @@
+server:
+  port: 9090 # <- CORREGIDO: Volvemos al puerto Jefa del Gateway
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      # --- CONFIGURACIÓN GLOBAL DE CORS (EVITA ERRORES DE RED EN FRONT-END) ---
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+      routes:
+        # 1. CLIENTES - Puerto 8082
+        - id: ms-clientes
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/clientes/**, /api/direcciones/**, /api/fidelidades/**
+
+        # 2. PRODUCTOS - Puerto 8081
+        - id: ms-productos
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/productos/**, /api/categorias/**, /api/ofertas/**
+
+        # 3. INVENTARIO - Puerto 8085
+        - id: ms-inventario
+          uri: http://localhost:8085 
+          predicates:
+            - Path=/api/movimientos/**, /api/bodegas/**, /api/inventario/**
+
+        # 4. PROVEEDORES - Puerto 8083
+        - id: ms-proveedores
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/proveedores/**, /api/suministros/**, /api/contactos/**
+
+        # 5. VENTAS - Puerto 8084
+        - id: ms-ventas
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/ventas/**, /api/metodos-pago/**
+
+        # 6. RECLAMOS - Puerto 8087
+        - id: ms-reclamos
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/reclamos/**, /api/historial/**, /api/resoluciones/**
+
+        # 7. CALIFICACION - Puerto 8088
+        - id: ms-calificacion
+          uri: http://localhost:8088
+          predicates:
+            - Path=/api/calificaciones/**, /api/comentarios/**
+
+        # 8. PEDIDOS - Puerto 8089
+        - id: ms-pedidos
+          uri: http://localhost:8089
+          predicates:
+            - Path=/api/pedidos/**, /api/envios/**, /api/detalles/**
+
+        # 9. FACTURACION - Puerto 8090
+        - id: ms-facturacion
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/facturas/**, /api/recibos/**
+
+        # 10. SOPORTE - Puerto 8091
+        - id: ms-soporte
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/tickets/**, /api/asistencia/**
+
+# --- CONFIGURACIÓN DE SWAGGER CENTRALIZADO EN EL GATEWAY ---
+# Esto unifica los 10 Swagger en la esquina superior derecha del puerto 9090
+springdoc:
+  swagger-ui:
+    urls:
+      - name: 1. Clientes
+        url: /api/clientes/v3/api-docs
+      - name: 2. Productos
+        url: /api/productos/v3/api-docs
+      - name: 3. Inventario
+        url: /api/inventario/v3/api-docs
+      - name: 4. Proveedores
+        url: /api/proveedores/v3/api-docs
+      - name: 5. Ventas
+        url: /api/ventas/v3/api-docs
+      - name: 6. Reclamos
+        url: /api/reclamos/v3/api-docs
+      - name: 7. Calificaciones
+        url: /api/calificaciones/v3/api-docs
+      - name: 8. Pedidos
+        url: /api/pedidos/v3/api-docs
+      - name: 9. Facturación
+        url: /api/facturas/v3/api-docs
+      - name: 10. Soporte
+        url: /api/tickets/v3/api-docs

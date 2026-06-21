@@ -6,6 +6,18 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      # --- CONFIGURACIÓN GLOBAL DE CORS (SOLUCIONA EL ERROR RED) ---
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
       routes:
         # 1. CLIENTES - Puerto 8082
         - id: ms-clientes
@@ -36,3 +48,16 @@ spring:
           uri: http://localhost:8084
           predicates:
             - Path=/api/ventas/**, /api/metodos-pago/**
+
+        # 6. RECLAMOS - Puerto 8087
+        - id: ms-reclamos
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/reclamos/**, /api/historial/**, /api/resoluciones/**, /v3/api-docs/**
+
+# --- CONFIGURACIÓN DE SWAGGER EN EL GATEWAY ---
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Servicio Reclamos
+        url: /api/reclamos/v3/api-docs

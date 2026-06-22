@@ -1,12 +1,11 @@
 server:
-  port: 9090 # <- CORREGIDO: Volvemos al puerto Jefa del Gateway
+  port: 9090
 
 spring:
   application:
     name: api-gateway
   cloud:
     gateway:
-      # --- CONFIGURACIÓN GLOBAL DE CORS (EVITA ERRORES DE RED EN FRONT-END) ---
       globalcors:
         cors-configurations:
           '[/**]':
@@ -19,88 +18,107 @@ spring:
               - OPTIONS
             allowedHeaders: "*"
       routes:
-        # 1. CLIENTES - Puerto 8082
+        # 1. CLIENTES
         - id: ms-clientes
           uri: http://localhost:8082
           predicates:
-            - Path=/api/clientes/**, /api/direcciones/**, /api/fidelidades/**
+            - Path=/api/clientes/**, /api/direcciones/**, /api/fidelidades/**, /docs/clientes/**
+          filters:
+            - RewritePath=/docs/clientes/(?<segment>.*), /$\{segment}
 
-        # 2. PRODUCTOS - Puerto 8081
+        # 2. PRODUCTOS
         - id: ms-productos
           uri: http://localhost:8081
           predicates:
-            - Path=/api/productos/**, /api/categorias/**, /api/ofertas/**
+            - Path=/api/productos/**, /api/categorias/**, /api/ofertas/**, /docs/productos/**
+          filters:
+            - RewritePath=/docs/productos/(?<segment>.*), /$\{segment}
 
-        # 3. INVENTARIO - Puerto 8085
+        # 3. INVENTARIO
         - id: ms-inventario
           uri: http://localhost:8085 
           predicates:
-            - Path=/api/movimientos/**, /api/bodegas/**, /api/inventario/**
+            - Path=/api/movimientos/**, /api/bodegas/**, /api/inventario/**, /docs/inventario/**
+          filters:
+            - RewritePath=/docs/inventario/(?<segment>.*), /$\{segment}
 
-        # 4. PROVEEDORES - Puerto 8083
+        # 4. PROVEEDORES
         - id: ms-proveedores
           uri: http://localhost:8083
           predicates:
-            - Path=/api/proveedores/**, /api/suministros/**, /api/contactos/**
+            - Path=/api/proveedores/**, /api/suministros/**, /api/contactos/**, /docs/proveedores/**
+          filters:
+            - RewritePath=/docs/proveedores/(?<segment>.*), /$\{segment}
 
-        # 5. VENTAS - Puerto 8084
+        # 5. VENTAS
         - id: ms-ventas
           uri: http://localhost:8084
           predicates:
-            - Path=/api/ventas/**, /api/metodos-pago/**
+            - Path=/api/ventas/**, /api/metodos-pago/**, /docs/ventas/**
+          filters:
+            - RewritePath=/docs/ventas/(?<segment>.*), /$\{segment}
 
-        # 6. RECLAMOS - Puerto 8087
+        # 6. RECLAMOS
         - id: ms-reclamos
           uri: http://localhost:8087
           predicates:
-            - Path=/api/reclamos/**, /api/historial/**, /api/resoluciones/**
+            - Path=/api/reclamos/**, /api/historial/**, /api/resoluciones/**, /docs/reclamos/**
+          filters:
+            - RewritePath=/docs/reclamos/(?<segment>.*), /$\{segment}
 
-        # 7. CALIFICACION - Puerto 8088
+        # 7. CALIFICACION
         - id: ms-calificacion
           uri: http://localhost:8088
           predicates:
-            - Path=/api/calificaciones/**, /api/comentarios/**
+            - Path=/api/calificaciones/**, /api/comentarios/**, /docs/calificacion/**
+          filters:
+            - RewritePath=/docs/calificacion/(?<segment>.*), /$\{segment}
 
-        # 8. PEDIDOS - Puerto 8089
+        # 8. PEDIDOS
         - id: ms-pedidos
           uri: http://localhost:8089
           predicates:
-            - Path=/api/pedidos/**, /api/envios/**, /api/detalles/**
+            - Path=/api/pedidos/**, /api/envios/**, /api/detalles/**, /docs/pedidos/**
+          filters:
+            - RewritePath=/docs/pedidos/(?<segment>.*), /$\{segment}
 
-        # 9. FACTURACION - Puerto 8090
+        # 9. FACTURACION
         - id: ms-facturacion
           uri: http://localhost:8090
           predicates:
-            - Path=/api/facturas/**, /api/recibos/**
+            - Path=/api/facturas/**, /api/recibos/**, /docs/facturacion/**
+          filters:
+            - RewritePath=/docs/facturacion/(?<segment>.*), /$\{segment}
 
-        # 10. SOPORTE - Puerto 8091
+        # 10. SOPORTE
         - id: ms-soporte
-          uri: http://localhost:8091
+          uri: http://localhost:8086
           predicates:
-            - Path=/api/tickets/**, /api/asistencia/**
+            - Path=/api/tickets/**, /api/asistencia/**, /docs/soporte/**
+          filters:
+            - RewritePath=/docs/soporte/(?<segment>.*), /$\{segment}
 
-# --- CONFIGURACIÓN DE SWAGGER CENTRALIZADO EN EL GATEWAY ---
-# Esto unifica los 10 Swagger en la esquina superior derecha del puerto 9090
+# --- CONFIGURACIÓN DE SWAGGER CENTRALIZADO ---
 springdoc:
   swagger-ui:
     urls:
       - name: 1. Clientes
-        url: /api/clientes/v3/api-docs
+        url: /docs/clientes/v3/api-docs
       - name: 2. Productos
-        url: /api/productos/v3/api-docs
+        url: /docs/productos/v3/api-docs
       - name: 3. Inventario
-        url: /api/inventario/v3/api-docs
+        url: /docs/inventario/v3/api-docs
       - name: 4. Proveedores
-        url: /api/proveedores/v3/api-docs
+        url: /docs/proveedores/v3/api-docs
       - name: 5. Ventas
-        url: /api/ventas/v3/api-docs
+        url: /docs/ventas/v3/api-docs
       - name: 6. Reclamos
-        url: /api/reclamos/v3/api-docs
+        url: /docs/reclamos/v3/api-docs
       - name: 7. Calificaciones
-        url: /api/calificaciones/v3/api-docs
+        url: /docs/calificacion/v3/api-docs
       - name: 8. Pedidos
-        url: /api/pedidos/v3/api-docs
+        url: /docs/pedidos/v3/api-docs
       - name: 9. Facturación
-        url: /api/facturas/v3/api-docs
+        url: /docs/facturacion/v3/api-docs
       - name: 10. Soporte
-        url: /api/tickets/v3/api-docs
+        url: /docs/soporte/v3/api-docs

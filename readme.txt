@@ -1,67 +1,101 @@
-# 🚀 SISTEMA DE GESTIÓN MAIPÚ MARKET
-**Asignatura:** Arquitectura de Microservicios  
-**Institución:** Duoc UC Sede Maipú
+========================================================================
+SISTEMA DE MICROSERVICIOS - DASHBOARD DE GESTION INTEGRADA
+========================================================================
 
----
+Este repositorio contiene el ecosistema de microservicios desarrollado 
+en Java con Spring Boot para el proyecto de fin de semestre. La 
+arquitectura esta disenada para ser escalable, modular y cuenta con 
+un API Gateway centralizado y documentacion unificada mediante 
+Swagger/OpenAPI.
 
-## 👥 1. EQUIPO Y RESPONSABILIDADES
-Nos dividimos los módulos estratégicamente para cubrir cada punto de la rúbrica:
+------------------------------------------------------------------------
+1. ARQUITECTURA DEL SISTEMA
+------------------------------------------------------------------------
 
-* **Ignacio Álvarez:** Desarrolló el **Microservicio de Productos e Inventario**. Implementó la persistencia con JPA y el manejo de relaciones `@ManyToOne`.
-* **Roberto Marín:** Se encargó del **Microservicio de Ventas**, asegurando la integridad de los datos mediante validaciones con **Bean Validation**.
-* **Benyamin Arcapio:** Diseñó el **API Gateway**, el **Microservicio de Proveedores/Clientes** y el sistema de **Manejo Centralizado de Excepciones**.
+El proyecto esta compuesto por los siguientes modulos distribuidos:
 
----
+* api-gateway: 
+  Componente central que unifica el punto de entrada de las peticiones 
+  y gestiona el enrutamiento hacia los microservicios correspondientes.
 
-## 🏗️ 2. ARQUITECTURA (Patrón CSR)
-El sistema opera bajo una arquitectura de microservicios independientes. El **API Gateway** es el único punto de entrada.
+* ms-calificacion: 
+  Gestion y procesamiento de calificaciones y evaluaciones, configurado 
+  con soporte para OpenAPI v3.
 
-| Microservicio | Puerto | Descripción |
-| :--- | :--- | :--- |
-| **API Gateway** | `9090` | Enrutamiento y reescritura de prefijos `/api`. |
-| **MS-Productos** | `8081` | Gestión de catálogo. |
-| **MS-Clientes** | `8082` | Registro de compradores. |
-| **MS-Proveedores**| `8083` | Gestión de suministros. |
-| **MS-Inventario** | `8084` | Control de stock. |
-| **MS-Ventas** | `8085` | Transacciones y validaciones. |
-ahora en este lugar deberia salir el puerto de 8086 que es calificacion
-en este ahora deberia de salir en el puesto de 8087 el de reclamos
+* ms-clientes: 
+  Modulo encargado de la gestion, registro y perfiles de usuarios y 
+  clientes.
 
----
+* ms-inventario: 
+  Control de stock, existencias y almacenamiento.
 
-## 🛠️ 3. ESPECIFICACIONES TÉCNICAS (RÚBRICA)
-* **Persistencia:** MySQL 8.0 gestionado con **Hibernate**.
-* **Validación:** Uso de `@Valid` y restricciones en modelos para evitar datos corruptos.
-* **Gestión de Errores:** Implementación de `@ControllerAdvice` centralizado por servicio.
-* **Trazabilidad:** Logs estructurados con **SLF4J** para monitorear el flujo.
-* **Gateway:** Redirección automática y limpieza de rutas.
+* ms-productos: 
+  Catalogo centralizado de productos y especificaciones.
 
----
+* ms-proveedores: 
+  Gestion de abastecimiento y entidades proveedoras.
 
-## 🧩 4. EXTENSIONES RECOMENDADAS (VS Code)
-* **Extension Pack for Java:** Soporte para Maven, errores y depuración.
-* **Spring Boot Extension Pack:** Manejo de archivos `application.properties` y anotaciones.
-* **Lombok Annotations Support:** Evita errores visuales en Getters/Setters automáticos.
-* **MySQL / Database Client:** Conexión a la DB directamente desde el editor.
-* **Thunder Client / Postman:** Para testear los endpoints y el Gateway.
+* ms-soporte: 
+  Modulo de asistencia y gestion de tickets de soporte tecnico.
 
----
+* ms-ventas: 
+  Procesamiento de transacciones y ordenes de compra.
 
-## ⚙️ 5. PASOS PARA EJECUTAR
-1. **Clonar el repo:** `git clone [URL_DEL_REPO]`
-2. **Base de Datos:** Crear la DB `maipu_market` en MySQL.
-3. **Configuración:** Revisar las credenciales en el `application.properties` de cada servicio.
-4. **Arranque (IMPORTANTE):**
-   * Levantar primero el **api-gateway** (Puerto 9090).
-   * Luego levantar los demás microservicios de forma independiente.
+* ms_reclamos: 
+  Gestion y seguimiento de casos de atencion al cliente y reclamos.
 
----
+------------------------------------------------------------------------
+2. TECNOLOGIAS UTILIZADAS
+------------------------------------------------------------------------
 
-## 🆘 6. AYUDA RÁPIDA (Troubleshooting)
-* **¿El Gateway no redirige?** Revisa que el servicio de destino esté arriba y el puerto coincida.
-* **¿Error de conexión a DB?** Verifica que MySQL esté corriendo y que exista la base de datos `maipu_market`.
-* **¿No reconoce anotaciones/cambios?** Ejecuta un `mvn clean install` en la terminal para refrescar dependencias.
-* **¿Modificaste algo?** Solo necesitas reiniciar el microservicio afectado, los demás siguen corriendo.
+* Backend: Java 17 / Spring Boot 3.x
+* Gestion de Dependencias: Maven
+* Enrutamiento: Spring Cloud Gateway
+* Documentacion: Springdoc OpenAPI (Swagger UI v2.8.5)
+* Persistencia: SQL / Relacional (Bases de datos integradas por servicio)
 
----
-_Proyecto desarrollado para Duoc UC - 2026_
+------------------------------------------------------------------------
+3. ORDEN DE ENCENDIDO OBLIGATORIO
+------------------------------------------------------------------------
+
+Para que el ecosistema levante de forma correcta y los servicios se 
+reconozcan mutuamente, se deben iniciar los componentes en el siguiente 
+orden estricto:
+
+Paso 3.1: Capa de Datos
+Asegurarse de tener corriendo el motor de base de datos local 
+(Docker / XAMPP / Servicio SQL) antes de iniciar los servicios de Java.
+
+Paso 3.2: Microservicios del Negocio
+Levantar cada microservicio de manera independiente ejecutando el 
+siguiente comando dentro de la carpeta de cada uno (ms-productos, 
+ms-clientes, ms-calificacion, etc.):
+
+./mvnw spring-boot:run
+
+Paso 3.3: Puerta de Enlace (API Gateway)
+Debe levantarse al final. Una vez que todos los microservicios esten 
+en ejecucion en sus respectivos puertos, ingresar a la carpeta 
+api-gateway y ejecutar el comando:
+
+./mvnw spring-boot:run
+
+------------------------------------------------------------------------
+4. DOCUMENTACION DE LA API (SWAGGER UI)
+------------------------------------------------------------------------
+
+El microservicio de calificaciones cuenta con documentacion interactiva 
+expuesta a traves de Swagger. Una vez que el servicio este corriendo, 
+se puede acceder a la interfaz web para realizar pruebas de endpoints 
+(GET, POST, PUT, DELETE) en la siguiente URL:
+
+http://localhost:[PUERTO_MS_CALIFICACION]/swagger-ui/index.html
+
+* Ruta de API Docs: /api/calificaciones/v3/api-docs
+
+------------------------------------------------------------------------
+5. INTEGRANTES DEL PROYECTO
+------------------------------------------------------------------------
+* Benyamin Arcapio
+* Roberto Marimon
+* Ignacio Alvarez

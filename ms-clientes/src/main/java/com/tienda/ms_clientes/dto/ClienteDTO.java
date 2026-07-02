@@ -12,4 +12,6 @@ public class ClienteDTO {
     private String email; 
     @NotBlank(message = "El telefono es obligatorio")
     private String telefono;
+    @NotBlank(message = "La contraseña es obligatoria")
+    private String password;
 }

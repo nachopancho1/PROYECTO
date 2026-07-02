@@ -11,9 +11,9 @@
     </parent>
     
     <groupId>com.tienda</groupId>
-    <artifactId>NOMBRE_DE_TU_SERVICIO</artifactId> 
+    <artifactId>ms-caificacion</artifactId> 
     <version>0.0.1-SNAPSHOT</version>
-    <name>NOMBRE_DE_TU_SERVICIO</name>
+    <name>ms-caificacion</name>
 
     <properties>
         <java.version>17</java.version>

@@ -24,6 +24,9 @@ public class Cliente {
     @NotBlank(message = "El teléfono es obligatorio")
     private String telefono;
 
+    @NotBlank(message = "La contraseña es obligatoria")
+    private String password;
+
     // Relación Uno a Muchos: Un cliente tiene varias direcciones
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Direccion> direcciones;

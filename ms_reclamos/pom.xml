@@ -10,9 +10,9 @@
     </parent>
     
     <groupId>com.tienda</groupId>
-    <artifactId>ms-CAMBIA_AQUI_EL_NOMBRE</artifactId>
+    <artifactId>ms-reclamos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms-CAMBIA_AQUI_EL_NOMBRE</name>
+    <name>ms-reclamos</name>
 
     <properties>
         <java.version>17</java.version>

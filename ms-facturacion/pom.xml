@@ -11,9 +11,9 @@
     </parent>
     
     <groupId>com.tienda</groupId>
-    <artifactId>NOMBRE_DEL_SERVICIO</artifactId>
+    <artifactId>ms-facturacion</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>NOMBRE_DEL_SERVICIO</name>
+    <name>ms-facturacion</name>
 
     <properties>
         <java.version>17</java.version>

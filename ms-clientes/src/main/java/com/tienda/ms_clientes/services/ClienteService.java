@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.time.LocalDate;
 
 @Service
@@ -41,6 +42,8 @@ public class ClienteService {
         c.setNombre(dto.getNombre());
         c.setEmail(dto.getEmail());
         c.setTelefono(dto.getTelefono());
+        
+        c.setPassword(dto.getPassword()); 
         
         Cliente nuevoCliente = clienteRepo.save(c);
         
@@ -87,6 +90,7 @@ public class ClienteService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Perfil de fidelidad no encontrado para el cliente"));
     }
+
     // MÉTODO 5: Actualizar o Registrar Fidelidad Manualmente (Usa FidelidadDTO)
     @Transactional
     public Fidelidad actualizarFidelidad(FidelidadDTO dto) {
@@ -109,5 +113,13 @@ public class ClienteService {
         f.setCliente(c);
 
         return fidelidadRepo.save(f);
-        }
+    }
+
+    // MÉTODO 6: Buscar por Email (Benyamin Arcapio: Conexión para Login y Pruebas Unitarias)
+        public Optional<Cliente> buscarPorEmail(String email) {
+        log.info("Buscando cliente por email: {}", email);
+        return clienteRepo.findByEmail(email);
+    }
+
+    
 }

@@ -87,7 +87,8 @@
             "mainClass": "com.tienda.ms_facturacion.MsFacturacionApplication",
             "projectName": "ms-facturacion",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -97,7 +98,8 @@
             "mainClass": "com.tienda.ms_pedidos.MsPedidosApplication",
             "projectName": "ms-pedidos",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -106,6 +108,36 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.tienda.ms_soporte.MsSoporteApplication",
             "projectName": "ms-soporte",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsCalificacionApplication<ms-caificacion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_calificacion.MsCalificacionApplication",
+            "projectName": "ms-caificacion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsClientesApplication<ms-Clientes>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_clientes.MsClientesApplication",
+            "projectName": "ms-Clientes",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MsReclamosApplication<ms-reclamos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tienda.ms_reclamos.MsReclamosApplication",
+            "projectName": "ms-reclamos",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
